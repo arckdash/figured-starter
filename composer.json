@@ -11,13 +11,16 @@
         "php": "7.2.*",
         "fideloper/proxy": "^4.0",
         "jenssegers/mongodb": "^3.5",
-        "laravel/framework": "5.8.*",
+        "laravel/framework": "6.*",
+        "laravel/passport": "^8.2",
         "laravel/tinker": "^1.0",
         "mongodb/mongodb": "^1.4"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.6",
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
@@ -59,6 +62,13 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:models --write",
+            "@php artisan ide-helper:meta",
+            "@php vendor/bin/php-cs-fixer fix app -v"
         ]
     }
 }
