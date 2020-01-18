@@ -62,6 +62,9 @@ return [
             'password' => env('MONGO_DB_PASSWORD', 'pass'),
             'database' => env('MONGO_DB_DATABASE', 'homestead'),
             'port'     => env('MONGO_DB_PORT', 27017),
+            'options' => [
+                'database' => 'admin'
+            ]
         ],
     ],
 
