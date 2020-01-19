@@ -15,7 +15,13 @@ b) once all docker images are downloaded and initialised
     ./init-app.sh
 
 Wait for composer, yarn and Mongo setup to complete.
-  
+
+Then you just need to copy the `secret` from the `ouath_clients` table and paste it on the file:
+
+    ./resources/js/pags/Auth/SignIn.vue
+
+This will allow the client to make request to the BE, and also make sure the `client_id` matches the right record.
+
 A basic laravel app should then be available at http://localhost:8080
 
 ## Running laravel commands
