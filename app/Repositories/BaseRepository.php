@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use Exception;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Exception;
 
 abstract class BaseRepository
 {
@@ -21,7 +21,6 @@ abstract class BaseRepository
     protected $app;
 
     /**
-     * @param Container $app
      * @throws Exception
      */
     public function __construct(Container $app)
@@ -45,8 +44,6 @@ abstract class BaseRepository
     /**
      * Create a new entity.
      *
-     * @param array $attributes
-     *
      * @return mixed
      */
     public function create(array $attributes = [])
@@ -54,20 +51,9 @@ abstract class BaseRepository
         return $this->model = $this->model->create($attributes);
     }
 
-//    /**
-//     * Create a new instance of class without persisting it.
-//     *
-//     * @return mixed
-//     */
-//    public function createObject()
-//    {
-//        return $this->app->make($this->modelClassName);
-//    }
-
     /**
      * Update an existing model.
      *
-     * @param array $attributes
      * @param mixed $id
      *
      * @return mixed
@@ -80,11 +66,21 @@ abstract class BaseRepository
     }
 
     /**
+     * Update an existing model.
+     *
+     * @param mixed $id
+     *
+     * @return mixed
+     */
+    public function updateCollectionObject($id, array $attributes = [])
+    {
+        $this->model->where('_id', $id)->update($attributes);
+
+        return $this->find($id);
+    }
+
+    /**
      * Get all the items.
-     *
-     * @param array $attributes
-     *
-     * @return EloquentCollection
      */
     public function all(array $attributes = ['*']): EloquentCollection
     {
@@ -118,7 +114,7 @@ abstract class BaseRepository
         if ( ! empty($model)) {
             $this->model = $model;
         }
-//        if ($model instanceof EloquentCollection|| $model instanceof EloquentCollection) {
+
         if ($model instanceof EloquentCollection) {
             $model = $model->first();
         }
@@ -141,10 +137,6 @@ abstract class BaseRepository
 
     /**
      * Filter by multiple conditions.
-     *
-     * @param array $where
-     *
-     * @return EloquentCollection
      */
     public function findByMultiple(array $where): EloquentCollection
     {
@@ -153,8 +145,6 @@ abstract class BaseRepository
 
     /**
      * Filter by multiple conditions.
-     *
-     * @param array $where
      *
      * @return mixed
      */
@@ -165,11 +155,6 @@ abstract class BaseRepository
 
     /**
      * Get a specific entity.
-     *
-     * @param string $attribute
-     * @param string $value
-     *
-     * @return EloquentCollection
      */
     public function findByWithTrashed(string $attribute, string $value): EloquentCollection
     {
@@ -178,11 +163,6 @@ abstract class BaseRepository
 
     /**
      * Get all entity's matching condition.
-     *
-     * @param string $attribute
-     * @param string $value
-     *
-     * @return EloquentCollection
      */
     public function findAllByWithTrashed(string $attribute, string $value): EloquentCollection
     {
@@ -191,11 +171,6 @@ abstract class BaseRepository
 
     /**
      * Find an item by slug.
-     *
-     * @param string $slug
-     * @param array  $columns
-     *
-     * @return EloquentCollection
      */
     public function findBySlug(string $slug, array $columns = ['*']): EloquentCollection
     {
@@ -206,8 +181,6 @@ abstract class BaseRepository
      * Delete an entity.
      *
      * @param mixed $ids
-     *
-     * @return bool
      */
     public function remove($ids): bool
     {
@@ -216,8 +189,6 @@ abstract class BaseRepository
 
     /**
      * Delete multiple by condition.
-     *
-     * @param array $where
      *
      * @return mixed
      */
@@ -230,8 +201,6 @@ abstract class BaseRepository
      * Restore a soft deleted entity.
      *
      * @param array $idsArray
-     *
-     * @return bool
      */
     public function restoreSoftDelete($idsArray): bool
     {

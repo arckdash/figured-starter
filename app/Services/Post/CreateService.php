@@ -7,7 +7,7 @@ namespace App\Services\Post;
 use App\Repositories\PostRepository;
 use App\Services\BaseService;
 
-class ListService extends BaseService
+class CreateService extends BaseService
 {
     /**
      * @var PostRepository
@@ -24,6 +24,12 @@ class ListService extends BaseService
      */
     public function processData(array $data = []): array
     {
-        return $this->postRepository->all()->toArray();
+        $post = $this->postRepository->create($data);
+
+        return [
+            'id' => $post->id,
+            'title' => $post->title,
+            'content' => $post->content,
+        ];
     }
 }
