@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/** @var Router $api */
+$api = app(Router::class);
+
+$api->group(['prefix' => 'v1'], static function (Router $api) {
+    $api->get('health-check', ['as' => 'healthCheck', 'uses' => 'HealthCheckController']);
+
+    // Posts
+    $api->group(['namespace' => 'Post', 'prefix' => 'posts'], static function (Router $api) {
+        $api->get('', ['as' => 'listPosts', 'uses' => 'ListController']);
+    });
 });
+
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});

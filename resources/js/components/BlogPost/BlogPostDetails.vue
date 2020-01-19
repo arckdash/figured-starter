@@ -1,9 +1,9 @@
 <template>
     <div>
-        <router-view />
+        <h1>Blog Post Details ...</h1>
     </div>
 </template>
 
 <script>
-    export default {}
+    export default {};
 </script>
