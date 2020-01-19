@@ -9,25 +9,22 @@ use App\Entities\User;
 abstract class BaseService
 {
     /**
-     * @var string $methodName
+     * @var User
+     */
+    protected $user;
+    /**
+     * @var string
      */
     private $methodName = 'execute';
 
     /**
-     * @var string $nextCallable
+     * @var string
      */
     private $nextCallable = 'processData';
 
     /**
-     * @var User $user
-     */
-    protected $user;
-
-    /**
      * Contains the logic the service should execute.
      *
-     * @param array $data
-     * @param array $middleware
      * @return mixed
      */
     public function execute(array $data = [], array $middleware = [])
@@ -40,9 +37,6 @@ abstract class BaseService
 
     /**
      * Resolve the middleware stack from the laravel container.
-     *
-     * @param array $middleware
-     * @param array $data
      */
     protected function resolveMiddleware(array $middleware, array $data): void
     {
@@ -62,8 +56,6 @@ abstract class BaseService
 
     /**
      * This function process the business rules for a given service.
-     *
-     * @param array $data
      *
      * @return mixed
      */

@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-
 /**
  * App\Entities\User.
  *
@@ -35,13 +34,19 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Entities\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Entities\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ *
+ * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property int|null                                                            $clients_count
+ * @property \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[]  $tokens
+ * @property int|null                                                            $tokens_count
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens;
+    use Notifiable;
 
     /**
-     * DB Connection to use
+     * DB Connection to use.
      *
      * @var string
      */

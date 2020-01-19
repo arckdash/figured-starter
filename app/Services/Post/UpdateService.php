@@ -7,7 +7,7 @@ namespace App\Services\Post;
 use App\Repositories\PostRepository;
 use App\Services\BaseService;
 
-class ListService extends BaseService
+class UpdateService extends BaseService
 {
     /**
      * @var PostRepository
@@ -24,6 +24,9 @@ class ListService extends BaseService
      */
     public function processData(array $data = []): array
     {
-        return $this->postRepository->all()->toArray();
+        $post = $this->postRepository->updateCollectionObject($data['id'], $data);
+        $post->save();
+
+        return $post->toArray();
     }
 }

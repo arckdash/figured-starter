@@ -8,24 +8,19 @@
 </template>
 
 <script>
-    import axios from 'axios';
     import BlogPostItemComponent from './BlogPostItem.vue';
 
     export default {
-        data: () => {
-            return {
-                posts: []
-            };
+        computed: {
+            posts() {
+                return this.$store.state.posts;
+            }
         },
         components: {
             'blog-post-item': BlogPostItemComponent
         },
         created() {
-            axios.get('http://localhost:8080/api/v1/posts')
-                .then((response) => {
-                    this.posts = response.data.posts;
-                    console.log(this.posts, response.data);
-                });
+            this.$store.dispatch('getPostList');
         }
     }
 </script>

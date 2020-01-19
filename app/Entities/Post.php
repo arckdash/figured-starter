@@ -1,16 +1,16 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace App\Entities;
 
-use Jenssegers\Mongodb\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class Post extends Model
 {
     /**
-     * DB Connection to use
+     * DB Connection to use.
      *
      * @var string
      */
@@ -37,7 +37,6 @@ class Post extends Model
 
     /**
      * Get the comments associated with the post.
-     *
      */
     public function comments(): HasMany
     {
