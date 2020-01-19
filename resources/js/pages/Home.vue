@@ -4,7 +4,7 @@
         <hr>
         <nav-component :categories="categories" />
         <featured-component />
-        <blog-post-list-component :posts="posts"/>
+        <blog-post-list-component />
         <footer-component />
     </div>
 </template>
@@ -19,32 +19,8 @@
     export default {
         data: () => {
             return {
-                categories: [
-                    'World',
-                    'U.S.',
-                    'Technology',
-                    'Design',
-                    'Culture',
-                    'Business',
-                    'Politics',
-                    'Opinion',
-                    'Science',
-                    'Health',
-                    'Style',
-                    'Travel'
-                ],
-                posts: [
-                    {
-                        title: 'title_1',
-                        content: 'content_1',
-                        isFeatured: false,
-                    },
-                    {
-                        title: 'title_2',
-                        content: 'content_2',
-                        isFeatured: true,
-                    }
-                ]
+                // categories: this.$store.state.categories,
+                categories: [],
             }
         },
         components: {

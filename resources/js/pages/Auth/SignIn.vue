@@ -13,7 +13,6 @@
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
         </form>
     </div>
 </template>
