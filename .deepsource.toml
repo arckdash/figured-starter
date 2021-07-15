@@ -1,0 +1,11 @@
+version = 1
+
+test_patterns = [
+    "app/**",
+    "config/**",
+    "routes/**"
+]
+
+[[analyzers]]
+name = "php"
+enabled = true
